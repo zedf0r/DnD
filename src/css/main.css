@@ -211,7 +211,6 @@ body {
 .dragged {
     position: absolute;
     z-index: 999;
-    /* pointer-events: none; */
+    pointer-events: none;
     width: 437px;
-    cursor: grabbing;
 }
