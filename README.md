@@ -1,3 +1,3 @@
 # Выполненное задание
 
-![CI](https://github.com/zedf0r/html-forms/actions/workflows/web.yml/badge.svg)
+![CI](https://github.com/zedf0r/DnD/actions/workflows/web.yml/badge.svg)
