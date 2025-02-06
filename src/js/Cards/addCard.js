@@ -32,6 +32,10 @@ export function addForm() {
         formElement.classList.add("main__list-form");
         formElement.innerHTML = form;
         cardContainer.insertAdjacentElement("beforeend", formElement);
+        const formClose = formElement.querySelector('.button-close');
+        formClose.addEventListener('click', () => {
+          formElement.remove();
+        })
 
         formElement.addEventListener("submit", (e) => {
           e.preventDefault();
@@ -45,6 +49,11 @@ export function addForm() {
           listItem.innerHTML = newCard(input.value);
 
           formElement.insertAdjacentElement("beforebegin", listItem);
+          
+          formClose.removeEventListener('click', () => {
+            formElement.remove();
+          })
+
           formElement.remove();
           removeCard();
         });

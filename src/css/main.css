@@ -188,6 +188,8 @@ body {
 .button-close {
     position: relative;
     cursor: pointer;
+    width: 20px;
+    height: 20px;
 }
 
 .button-close div {
