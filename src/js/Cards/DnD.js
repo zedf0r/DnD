@@ -19,7 +19,6 @@ export function dragAndDrop() {
 
     const mouseUpItem = e.target.closest('.main__list-card')
     const mouseUpContainer = e.target.closest('.main__list-item')
-    const placeholderFind = document.querySelector('.placeholder');
 
     if (mouseUpItem) {
       placeholder.replaceWith(actualElement)
