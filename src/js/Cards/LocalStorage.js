@@ -40,7 +40,7 @@ export function loadData() {
         const card = document.createElement("div");
         card.classList.add("main__list-card", "card");
         card.innerHTML = newCard(text);
-        container.insertAdjacentElement("afterbegin", card);
+        container.appendChild(card);
         removeCard();
       });
     });
