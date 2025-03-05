@@ -17,16 +17,22 @@ export function dragAndDrop() {
     actualElement.classList.remove('opacity-card');
     cloneElement.remove();
 
-    const mouseUpItem = e.target.closest('.main__list-card')
-    const mouseUpContainer = e.target.closest('.main__list-item')
+    placeholder.replaceWith(actualElement)
 
-    if (mouseUpItem) {
-      placeholder.replaceWith(actualElement)
-    } 
-    else if (!mouseUpItem && mouseUpContainer) {
-      const container = mouseUpContainer.querySelector('.main__list-container')
-      container.appendChild(actualElement)
-    }
+    // const mouseUpItem = e.target.closest('.main__list-card')
+    // const mouseUpContainer = e.target.closest('.main__list-item')
+    // const mouseUpPlaceholder = e.target.closest('.placeholder')
+
+    // if (mouseUpItem) {
+    //   placeholder.replaceWith(actualElement)
+    // }
+    // else if (mouseUpPlaceholder) {
+    //   placeholder.replaceWith(actualElement)
+    // } 
+    // else if (!mouseUpItem && mouseUpContainer) {
+    //   const container = mouseUpContainer.querySelector('.main__list-container')
+    //   container.appendChild(actualElement)
+    // }
 
     actualElement.classList.remove('dragged');
 
@@ -51,26 +57,27 @@ export function dragAndDrop() {
       const rect = hoveredCard.getBoundingClientRect();
       const isAfter = e.clientY > rect.top + rect.height / 2;
       
-      if (isAfter) {
+      if (isAfter && placeholder.previousElementSibling !== hoveredCard) {
         hoveredCard.insertAdjacentElement('beforebegin', placeholder);
         placeholder.style.display = 'block'
       }
     } 
 
-    // #Код который ломает логику добавление placeholder (Placeholder начинает перебегать то вверх, то вниз)
+    else if (hoveredContainer && placeholder.parentElement !== hoveredContainer) {
+      hoveredContainer.appendChild(placeholder)
+    } else if (hoveredItem) {
+        const nullContainer = hoveredItem.querySelector('.main__list-container');
 
-    // else if (hoveredContainer) {
-    //   hoveredContainer.appendChild(placeholder)
-    // } else if (hoveredItem) {
-    //     const nullContainer = hoveredItem.querySelector('.main__list-container');
-    //     nullContainer.appendChild(placeholder)
-    // } 
+        if (placeholder.parentElement !== nullContainer) {
+          nullContainer.appendChild(placeholder)
+          placeholder.style.display = 'block'
+        }
+    } 
 
   }
 
   items.addEventListener('mousedown', (e) => {
     actualElement = e.target.closest('.main__list-card')
-    cloneElement = actualElement.cloneNode(true)
     const container = e.target.closest('.main__list-container')
     const buttonClose = e.target.closest('.main__list-card--close')
     if (buttonClose) {
@@ -80,6 +87,7 @@ export function dragAndDrop() {
       return
     } else if (actualElement) {
       e.preventDefault() 
+      cloneElement = actualElement.cloneNode(true)
       container.appendChild(cloneElement);
 
       actualElement.classList.add('opacity-card');
